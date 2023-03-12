@@ -8,12 +8,6 @@ const passwordConfirm = document.getElementById("passwordConfirm");
 const passwordError = document.querySelector(".passwordError");
 const passwordMatchError = document.querySelector(".password-match-error");
 
-email.addEventListener("input", (event) => {
-  if (email.validity.valid) {
-    emailError.textContent = "";
-  } else showError();
-});
-
 function showError() {
   if (email.validity.valueMissing) {
     emailError.textContent = "You need to enter an email address";
@@ -23,13 +17,6 @@ function showError() {
     emailError.textContent = `Email shorter than hobbit. characters ${email.value.length}. (${email.minLength}) `;
   }
 }
-
-password.addEventListener("input", (e) => {
-  if (password.validity.valid) {
-    passwordError.textContent = "";
-  } else showPasswordError();
-});
-
 function showPasswordError() {
   const passwordField = document.getElementById("password");
 
@@ -66,8 +53,8 @@ function showPasswordError() {
       "Password must contain at least one special character. ";
     return false;
   }
+  return passwordField.value;
 }
-//////////////////////////////////////////////////////////////////////////////
 function checkZIP() {
   const constraints = {
     ch: [
@@ -98,22 +85,34 @@ function checkZIP() {
     zipError.textContent = "Invalid Zip";
   }
 }
+function errorPasswordMatch() {
+  passwordMatchError.textContent = "password not matching";
+}
+
+email.addEventListener("input", () => {
+  if (email.validity.valid) {
+    emailError.textContent = "";
+  } else showError();
+});
+
+password.addEventListener("input", () => {
+  if (password.validity.valid) {
+    passwordError.textContent = "";
+  } else showPasswordError();
+});
 
 window.onload = () => {
   document.getElementById("Country").onchange = checkZIP;
   document.getElementById("ZIP").oninput = checkZIP;
 };
-/////////////////////////////////////////////////////////
 
-passwordConfirm.addEventListener("input", (event) => {
-  if (passwordConfirm.value === password.value) {
-    alert("true");
-  } else errorPasswordMatch();
+passwordConfirm.addEventListener("input", () => {
+  if (passwordConfirm.value !== password.value) {
+    errorPasswordMatch();
+  } else {
+    passwordMatchError.textContent = "";
+  }
 });
-
-function errorPasswordMatch() {
-  passwordMatchError.textContent = "password not matching";
-}
 
 form.addEventListener("submit", (e) => {
   if (
@@ -126,5 +125,13 @@ form.addEventListener("submit", (e) => {
     showError();
     checkZIP();
     errorPasswordMatch();
+  }
+  if (
+    password.validity.valid &&
+    email.validity.valid &&
+    ZIPField.validity.valid &&
+    passwordConfirm.validity.valid
+  ) {
+    alert("yessssssssssss");
   }
 });
