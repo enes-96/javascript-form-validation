@@ -58,3 +58,9 @@ input:focus:invalid {
   font-size: 14px;
   padding: 4px;
 }
+.password-match-error {
+  color: red;
+  display: block;
+  font-size: 14px;
+  padding: 4px;
+}

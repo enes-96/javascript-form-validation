@@ -6,6 +6,7 @@ const zipError = document.querySelector(".zipError");
 const password = document.getElementById("password");
 const passwordConfirm = document.getElementById("passwordConfirm");
 const passwordError = document.querySelector(".passwordError");
+const passwordMatchError = document.querySelector(".password-match-error");
 
 email.addEventListener("input", (event) => {
   if (email.validity.valid) {
@@ -103,17 +104,27 @@ window.onload = () => {
   document.getElementById("ZIP").oninput = checkZIP;
 };
 /////////////////////////////////////////////////////////
+
+passwordConfirm.addEventListener("input", (event) => {
+  if (passwordConfirm.value === password.value) {
+    alert("true");
+  } else errorPasswordMatch();
+});
+
+function errorPasswordMatch() {
+  passwordMatchError.textContent = "password not matching";
+}
+
 form.addEventListener("submit", (e) => {
-  checkZIP();
-  showPasswordError();
   if (
+    !password.validity.valid ||
     !email.validity.valid ||
-    !ZIPField.validity.valid ||
-    !password.validity.valid
+    !ZIPField.validity.valid
   ) {
     e.preventDefault();
     showPasswordError();
     showError();
     checkZIP();
+    errorPasswordMatch();
   }
 });
