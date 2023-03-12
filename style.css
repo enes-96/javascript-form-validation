@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  font-family: sans-serif;
+}
+form {
+  padding: 24px;
+}
+label {
+  display: block;
+  padding-bottom: 6px;
+  font-size: 18px;
+  margin-top: 24px;
+}
+input,
+select {
+  border: none;
+  outline: none;
+  background-color: #e6e6e6;
+  padding: 10px 14px;
+  transition: 0.3s all;
+  width: 240px;
+  font-size: 16px;
+  border-radius: 6px;
+}
+input[type="submit"] {
+  width: 120px;
+  display: block;
+  margin: 24px 0;
+}
+input::placeholder {
+  color: #a7a5a5;
+}
+input:focus:invalid {
+  box-shadow: rgba(255, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(255, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 0, 0, 0.05) 0px 0px 0px 1px inset;
+}
+.error {
+  color: red;
+  display: block;
+  font-size: 14px;
+  padding: 4px;
+}
+.zipError {
+  color: red;
+  display: block;
+  font-size: 14px;
+  padding: 4px;
+}
+.passwordError {
+  color: red;
+  display: block;
+  font-size: 14px;
+  padding: 4px;
+}
